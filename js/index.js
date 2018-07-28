@@ -6,17 +6,18 @@ var time = today.getTime();
 var hr = today.getHours()
 var min = today.getMinutes()
 var sec = today.getSeconds()
-var ampm = "am";
 
 
 if (min < 10) {
     min = "0" + min;
 }
 
+if (sec < 10) {
+  sec = '0'+sec
+}
 
 if( hr > 12 ) {
     hr -= 12;
-    ampm = "pm";
 }
 
 if(dd<10) {
@@ -27,7 +28,22 @@ if(mm<10) {
     mm = '0'+mm
 } 
 
+function seconds() {
+  return sec
+}
 
+
+var myVar = setInterval(myTimer, 1000);
+
+function myTimer() {
+    var d = new Date();
+    var t = d.toLocaleTimeString();
+    document.getElementById("time").innerHTML = t
+}
+
+function myStopFunction() {
+    clearInterval(myVar);
+}
 
 new Vue({
   el: '#app',
@@ -36,6 +52,6 @@ new Vue({
     pic: "https://yt3.ggpht.com/a-/ACSszfE8jr9X-8TOrsyUy2zRAX1F_6ZZz9knfCIv0w=s900-mo-c-c0xffffffff-rj-k-no",
     Id: Math.floor(1000 + Math.random() * 9000),
     date: mm + '/' + dd + '/' + yyyy,
-    time: hr+':'+min+':'+sec+ampm
+    time: myTimer()
   }
 })
